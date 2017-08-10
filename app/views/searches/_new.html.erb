@@ -1,0 +1,20 @@
+
+<%=form_for @search, html:{class: "pure-form"} do |s| %>
+
+<div class "field">
+    <%=s.label :city_departure, "Город отправления" %><br />
+    <%=s.text_field :city_departure %>
+</div>
+
+<div class "field">
+    <%=s.label :date_departure, "Дата отправления" %><br />
+    <%=s.date_select :date_departure %>
+</div>
+
+<div class "action">
+    <%=s.submit "Search", class: "pure-button pure-button-primary" %>
+</div>
+
+
+<% end %>
+<p><%=link_to "Back", buses_path %></p>

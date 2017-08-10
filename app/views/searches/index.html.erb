@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"
+    <title>JSON Search</title>
+    <body>
+  </head>
+  <%=form_for @search, html:{class: "pure-form"} do |s| %>
+
+  <div class "field">
+      <%=s.label :city_departure, "Город отправления" %><br />
+      <%=s.text_field :city_departure %>
+  </div>
+
+  <div class "field">
+      <%=s.label :date_departure, "Дата отправления" %><br />
+      <%=s.date_select :date_departure %>
+  </div>
+
+  <div class "action">
+      <%=s.submit "Search", class: "pure-button pure-button-primary" %>
+  </div>
+
+
+  <% end %>
+  <p><%=link_to "Back", buses_path %></p>
+    <script>
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        var response = JSON.parse(xhttp.responseText);
+        var data = response.data;
+        var output  = "";
+        for(var i = 0; i < data.length; i++){
+          output +="<li>" +data[i].Name + "/li"
+        }
+        console.log(response);
+        // Typical action to be performed when the document is ready:
+        document.getElementById("demo").innerHTML = xhttp.responseText;
+      }
+    };
+    xhttp.open("GET", "data.json", true);
+    xhttp.send();
+    </script>
+  </body>
+</html>
