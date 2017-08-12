@@ -1,4 +1,3 @@
-class ApplicationModel < ActiveModel::Model
-  include ActiveModel::Serialization::JSON
-  # self.abstract_class = true
+class ApplicationRecord < ActionController::Base
+  self.abstract_class = true
 end

@@ -1,24 +1,26 @@
-class Record < ApplicationModel
+
+class Record
+  include ActiveModel::Serializers::JSON
+  include ActiveModel::Conversion
+
   attr_accessor :name, :type, :designed_by
 
-  def attributes=(hash)
-    hash.each do |key, value|
-      send("#{key}=", value)
-    end
+   def initialize(attributes = {})
+     attributes.each do |name, value|
+       send("#{name}=".downcase, value)
+     end
   end
 
-  def attributes
-    { 'Name' => nil,
-      'Type' => nil,
-      'Designed by' => nil }
-   end
+  def persisted?
+    false
+  end
 
   # logic of ActiveRecord module
-  def new_record?
-    if true
-      records.create
-    else
-      records.update
-    end
-  end
+  # def new_record?
+  #   if true
+  #     records.create
+  #   else
+  #     records.update
+  #   end
+  # end
 end
